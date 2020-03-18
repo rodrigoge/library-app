@@ -5,6 +5,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+	<f:metadata>			
+		<f:viewParam name="id" value="#{userController.user}"/>	
+		<f:viewAction action="#{userController.init}" />
+	</f:metadata>
 
 	<h:head>
 		<title>Cadastrar usuário</title>
@@ -13,10 +17,29 @@
 	<h:form>
 		<h2>Cadastro de usuários</h2>
 		
-		<span>
-			<p:inputText id="float-input" value="#{user.fullname}" placeholder="Nome do usuário"/>
-		</span>
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true"/>
 		
+		<p>
+			<p:inputText placeholder="Nome completo" id="fullname" value="#{userController.user.fullname}" />
+		
+			<p:inputText placeholder="Endereço" id="address" value="#{userController.user.address}" />
+		</p>
+		
+		<p>
+			<p:inputText placeholder="Telefone" id="phone" value="#{userController.user.phone}" />
+			<p:inputText placeholder="Email" id="email" value="#{userController.user.email}" />
+		</p>
+		
+		<p>
+			<p:inputText placeholder="Nome de usuário" id="username" value="#{userController.user.username}" />
+			<p:inputText placeholder="Senha" id="password" value="#{userController.user.password}" />
+		</p>
+		
+		<p>
+			<p:inputText placeholder="Tipo de usuário" id="typeuser" value="#{userController.user.typeuser}" />
+		</p>
+		
+		<p:commandButton value="Salvar" action="#{userController.save}" update="@form"/>
 		
 	</h:form>
 
