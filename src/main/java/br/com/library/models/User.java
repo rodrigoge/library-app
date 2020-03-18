@@ -2,7 +2,10 @@ package br.com.library.models;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -11,12 +14,26 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue
 	private Long id;
+	
+	@Column(length = 70, nullable = false)
 	private String fullname;
+	
+	@Column(length = 70, nullable = false)
 	private String username;
+	
+	@Column(length = 70, nullable = false)
 	private String password;
+	
+	@Column(length = 70, nullable = false)
 	private String address;
+	
+	@Column(length = 70, nullable = false)
 	private String phone;
+	
+	@Column(length = 70, nullable = false)
 	private String email;
 	
 	public Long getId() {
