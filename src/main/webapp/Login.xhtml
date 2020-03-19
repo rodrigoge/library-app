@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>			
+		<f:viewParam name="id" value="#{loginController.user}"/>	
+		<f:viewAction action="#{loginController.init}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Login | Livraria App</title>
+	</h:head>
+	
+	<h:form>
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true"/>
+		
+		<h2>Login</h2>
+		
+		<p>
+			<p:inputText placeholder="Nome de usuário" id="fullname" 
+				 value="#{loginController.user.username}" required="true" requiredMessage="Nome obrigatório."/>
+		</p>
+		<p>
+			<p:inputText placeholder="Senha" id="password" 
+				value="#{loginController.user.password}" required="true" requiredMessage="Senha obrigatória."/>
+		</p>
+		
+		<p:commandButton value="Entrar" action="#{loginController.login}" update="@form"/>
+	</h:form>
+	
+	
+</ui:composition>

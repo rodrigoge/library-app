@@ -26,7 +26,7 @@ public class UserRepository implements Serializable {
 	
 	//search for all users
 	public List<User> all(){
-		TypedQuery<User> query = data.createQuery("from user u order by u.id", User.class);
+		TypedQuery<User> query = data.createQuery("from User u order by u.id", User.class);
 		return query.getResultList();
 	}
 	
