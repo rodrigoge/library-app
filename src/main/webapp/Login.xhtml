@@ -20,7 +20,7 @@
 		<h2>Login</h2>
 		
 		<p>
-			<p:inputText placeholder="Nome de usuário" id="fullname" 
+			<p:inputText placeholder="Nome de usuário" id="username" 
 				 value="#{loginController.user.username}" required="true" requiredMessage="Nome obrigatório."/>
 		</p>
 		<p>
@@ -28,7 +28,7 @@
 				value="#{loginController.user.password}" required="true" requiredMessage="Senha obrigatória."/>
 		</p>
 		
-		<p:commandButton value="Entrar" action="#{loginController.login}" update="@form"/>
+		<p:commandButton value="Entrar" action="#{loginController.login}" update="@all"/>
 	</h:form>
 	
 	

@@ -4,23 +4,30 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{loginController.user}" />
+		<f:viewAction action="#{loginController.init}" />
+	</f:metadata>
+
 	<h:head>
-		<title>Livraria App</title>
+		<title>Home | Livraria App</title>
 	</h:head>
-	
-	<p:menubar>
-		<p:submenu label="Cadastros" icon="ui-icon-pencil">
-			<p:menuitem value="Usuário" url="User.xhtml"/>
-			<p:menuitem value="Produto" url="#"/>
-			<p:menuitem value="Fornecedor" url="#"/>
-		</p:submenu>
-		
-		<f:facet name="options">
-			<p:commandButton type="button" value="Sair" icon="ui-icon-closethick" action="/Login?faces-redirect=true"/>
-		</f:facet>
-	</p:menubar>
+
+	<h:form>
+		<p:menubar>
+			<p:submenu label="Cadastros" icon="ui-icon-pencil">
+				<p:menuitem value="Usuário" url="User.xhtml" />
+				<p:menuitem value="Produto" url="#" />
+				<p:menuitem value="Fornecedor" url="#" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:commandButton value="Sair" action="#{loginController.logout}"
+					icon="ui-icon-closethick" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
 
 </ui:composition>
-	
-	
+
