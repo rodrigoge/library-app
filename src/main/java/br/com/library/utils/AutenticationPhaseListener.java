@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.Application;
-import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
@@ -31,16 +30,12 @@ public class AutenticationPhaseListener implements PhaseListener{
 			ExternalContext externalContext = context.getExternalContext();
 			Map<String, Object> map = externalContext.getSessionMap();
 			LoginController loginController = (LoginController) map.get("loginController");
-			
 			List<User> allUsers = loginController.getAllUsers();
 			
 			if(allUsers.isEmpty()) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário não autenticado", "Erro"));
-				
 				Application app = context.getApplication();
 				NavigationHandler navigation = app.getNavigationHandler();
-				navigation.handleNavigation(context, null, "/Login?faces-redirect=true");
+				navigation.handleNavigation(context, null, "/Login.xhtml?faces-redirect=true");
 			}
 		}
 	}

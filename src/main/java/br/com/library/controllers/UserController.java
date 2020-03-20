@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.com.library.business.UserBusiness;
 import br.com.library.business.exception.BusinessException;
 import br.com.library.models.TypeUser;
@@ -39,6 +41,7 @@ public class UserController implements Serializable {
 		try {
 			transaction.begin();
 			UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
+			user.setPassword(DigestUtils.md5Hex(user.getPassword()));
 			userBusiness.save(user);
 			this.user = new User();
 			context.addMessage(null, new FacesMessage("Salvo com sucesso!"));

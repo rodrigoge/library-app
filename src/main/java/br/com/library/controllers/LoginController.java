@@ -11,6 +11,8 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import br.com.library.models.User;
 import br.com.library.repositories.UserRepository;
 import br.com.library.utils.DataConfiguration;
@@ -36,7 +38,7 @@ public class LoginController implements Serializable {
 
 	public String login() {
 
-		allUsers = userRepository.searchLogin(user.getUsername(), user.getPassword());
+		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()));
 		
 		if (allUsers.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
