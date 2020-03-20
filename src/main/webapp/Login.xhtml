@@ -24,14 +24,15 @@
 				 value="#{loginController.user.username}" required="true" requiredMessage="Nome obrigatório."/>
 		</p>
 		<p>
-			<p:inputText placeholder="Senha" id="password" 
-				value="#{loginController.user.password}" required="true" requiredMessage="Senha obrigatória."/>
+			<p:password placeholder="Senha" id="password" 
+				value="#{loginController.user.password}" required="true" requiredMessage="Senha obrigatória.">
+				<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i"/>
+			</p:password>
 		</p>
 		
 		<p:commandButton value="Entrar" action="#{loginController.login}" update="@all"/>
+		<p:link value="Cadastre-se" href="User.xhtml"/>
 		
 	</h:form>
-	
-	<p:commandLink value="Cadastre-se" href="User.xhtml"/>
 	
 </ui:composition>

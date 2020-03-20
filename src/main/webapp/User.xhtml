@@ -45,7 +45,9 @@
 			<p:password placeholder="Senha" id="password" value="#{userController.user.password}" 
 				feedback="true" promptLabel="Força da senha" 
 				weakLabel="Senha fraca" goodLabel="Senha média" strongLabel="Senha forte"
-				required="true" requiredMessage="Senha obrigatória."/>
+				required="true" requiredMessage="Senha obrigatória.">
+				<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i"/>	
+			</p:password>
 		</p>
 		
 		<p>

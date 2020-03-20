@@ -102,6 +102,7 @@
 			<version>2.2</version>
 		</dependency>
 
+		<!-- MD5 encrypted password -->
 		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 		<dependency>
 			<groupId>commons-codec</groupId>

@@ -22,11 +22,13 @@ public class AutenticationPhaseListener implements PhaseListener{
 	public void afterPhase(PhaseEvent event) {
 		FacesContext context = event.getFacesContext();
 		UIViewRoot ui = context.getViewRoot();
-		String pageAtual = ui.getViewId();
+		String pageLogin = ui.getViewId();
+		String pageUser = ui.getViewId();
 		
-		boolean pageAuth = pageAtual.contains("/Login.xhtml");
+		boolean pageAuthLogin = pageLogin.contains("/Login.xhtml");
+		boolean pageAuthUser = pageUser.contains("/User.xhtml");
 		
-		if(!pageAuth) {
+		if(!pageAuthLogin && !pageAuthUser) {
 			ExternalContext externalContext = context.getExternalContext();
 			Map<String, Object> map = externalContext.getSessionMap();
 			LoginController loginController = (LoginController) map.get("loginController");

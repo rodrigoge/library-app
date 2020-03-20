@@ -37,7 +37,7 @@ public class LoginController implements Serializable {
 	}
 
 	public String login() {
-
+		
 		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()));
 		
 		if (allUsers.isEmpty()) {
