@@ -37,7 +37,7 @@ public class LoginController implements Serializable {
 	public String login() {
 
 		allUsers = userRepository.searchLogin(user.getUsername(), user.getPassword());
-
+		
 		if (allUsers.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário ou senha incorretos.", "Erro"));
@@ -47,11 +47,13 @@ public class LoginController implements Serializable {
 					.getSession(false);
 
 			if (session != null) {
-				session.setAttribute("user", allUsers);
+				session.setAttribute("username", allUsers);
 			}
-
+			
 			return "/Home.faces?faces-redirect=true";
 		}
+		
+		
 	}
 
 	public String logout() {
@@ -60,6 +62,10 @@ public class LoginController implements Serializable {
 	}
 
 	public User getUser() {
+		if(user == null) {
+			user = new User();
+		}
+		
 		return user;
 	}
 
@@ -94,5 +100,7 @@ public class LoginController implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	
 
 }
