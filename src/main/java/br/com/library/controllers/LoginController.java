@@ -29,33 +29,38 @@ public class LoginController implements Serializable {
 	private UserRepository userRepository = new UserRepository(data);
 	private List<User> allUsers = new ArrayList<User>();
 	private String username = "";
-	
+
 	public void init() {
 		if (this.user == null) {
 			this.user = new User();
 		}
 	}
 
-	public String login() {
-	
-		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()), user.getTypeuser());
+	public String login()  {
+
+		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()),
+				user.getTypeuser());
 		
+		FacesContext context = FacesContext.getCurrentInstance();
+
 		if (allUsers.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário ou senha incorretos.", "Erro"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário ou senha incorretos.", "Erro"));
+			context.getExternalContext().getFlash().setKeepMessages(true); 
 			return null;
+			
 		} else {
+			context.addMessage(null, new FacesMessage("Login efetuado com sucesso."));
+			context.getExternalContext().getFlash().setKeepMessages(true);
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
 					.getSession(false);
-
 			if (session != null) {
 				session.setAttribute("username", allUsers);
 			}
-			
+
 			return "/Home.faces?faces-redirect=true";
 		}
 	}
-	
+
 	public boolean isLogged() {
 		if (this.user.getTypeuser().equals("ADMINISTRADOR")) {
 			return true;
@@ -69,10 +74,10 @@ public class LoginController implements Serializable {
 	}
 
 	public User getUser() {
-		if(user == null) {
+		if (user == null) {
 			user = new User();
 		}
-		
+
 		return user;
 	}
 

@@ -5,8 +5,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<f:metadata>			
-		<f:viewParam name="id" value="#{userController.user}"/>	
+	<f:metadata>
+		<f:viewParam name="id" value="#{userController.user}" />
 		<f:viewAction action="#{userController.init}" />
 	</f:metadata>
 
@@ -14,54 +14,64 @@
 		<title>Cadastrar usuário</title>
 	</h:head>
 
-	<h:form>
-		<h2>Cadastro de usuários</h2>
-		
-		<p:growl showDetail="false" autoUpdate="true" showSummary="true"/>
-		
-		<p>
-			<p:inputText placeholder="Nome completo" id="fullname" 
-				value="#{userController.user.fullname}" required="true" requiredMessage="Nome obrigatório."/>
-		
-			<p:inputText placeholder="Endereço" id="address" 
-				value="#{userController.user.address}" required="true" requiredMessage="Endereço obrigatório"/>
-		</p>
-		
-		<p>
-			<p:inputMask placeholder="Telefone" id="phone" 
-				value="#{userController.user.phone}" mask="(99) 99999-9999"/>
-				
-			<p:inputText placeholder="Email" id="email" value="#{userController.user.email}">
-				<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i"/> 
-			</p:inputText>
-		</p>
-		
-		<p>
-			<p:inputText placeholder="Nome de usuário" id="username" 
-				value="#{userController.user.username}" required="true" requiredMessage="Nome de usuário obrigatório.">
-				<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i"/>  
-			</p:inputText>
-			
-			<p:password placeholder="Senha" id="password" value="#{userController.user.password}" 
-				feedback="true" promptLabel="Força da senha" 
-				weakLabel="Senha fraca" goodLabel="Senha média" strongLabel="Senha forte"
-				required="true" requiredMessage="Senha obrigatória.">
-				<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i"/>	
-			</p:password>
-		</p>
-		
-		<p>
-			<!-- <p:inputText placeholder="Tipo de usuário" id="typeuser" value="#{userController.user.typeuser}" /> -->
-			<h:outputText value="Tipo de usuário:" />
-			<p:selectOneButton id="typeuser" value="#{userController.user.typeuser}"
-				required="true" requiredMessage="Tipo de usuário obrigatório.">
-				<f:selectItems value="#{userController.typeUser}" var="typeruser" itemValue="#{typeuser}" itemLabel="#{typeuser.type}"/>
-				
-			</p:selectOneButton>
-		</p>
-		
-		<p:commandButton value="Salvar" action="#{userController.save}" update="@form"/>
-		
-	</h:form>
+	<h:body>
+		<h:form>
+			<h2>Cadastro de usuários</h2>
+
+			<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+
+			<p>
+				<p:inputText placeholder="Nome completo" id="fullname"
+					value="#{userController.user.fullname}" required="true"
+					requiredMessage="Nome obrigatório." />
+
+				<p:inputText placeholder="Endereço" id="address"
+					value="#{userController.user.address}" required="true"
+					requiredMessage="Endereço obrigatório" />
+			</p>
+
+			<p>
+				<p:inputMask placeholder="Telefone" id="phone"
+					value="#{userController.user.phone}" mask="(99) 99999-9999" />
+
+				<p:inputText placeholder="Email" id="email"
+					value="#{userController.user.email}">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
+				</p:inputText>
+			</p>
+
+			<p>
+				<p:inputText placeholder="Nome de usuário" id="username"
+					value="#{userController.user.username}" required="true"
+					requiredMessage="Nome de usuário obrigatório.">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i" />
+				</p:inputText>
+
+				<p:password placeholder="Senha" id="password"
+					value="#{userController.user.password}" feedback="true"
+					promptLabel="Força da senha" weakLabel="Senha fraca"
+					goodLabel="Senha média" strongLabel="Senha forte" required="true"
+					requiredMessage="Senha obrigatória.">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
+				</p:password>
+			</p>
+
+			<p>
+				<!-- <p:inputText placeholder="Tipo de usuário" id="typeuser" value="#{userController.user.typeuser}" /> -->
+				<h:outputText value="Tipo de usuário:" />
+				<p:selectOneButton id="typeuser"
+					value="#{userController.user.typeuser}" required="true"
+					requiredMessage="Tipo de usuário obrigatório.">
+					<f:selectItems value="#{userController.typeUser}" var="typeruser"
+						itemValue="#{typeuser}" itemLabel="#{typeuser.type}" />
+
+				</p:selectOneButton>
+			</p>
+
+			<p:commandButton value="Salvar" action="#{userController.save}"
+				update="@form" />
+
+		</h:form>
+	</h:body>
 </ui:composition>
 

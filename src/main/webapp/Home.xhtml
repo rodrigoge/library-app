@@ -14,20 +14,23 @@
 		<title>Home | Livraria App</title>
 	</h:head>
 
-	<h:form id="frmMainMenu">
-		<p:menubar id="menuBar">
-			<p:submenu label="Cadastros" icon="ui-icon-pencil">
-				<p:menuitem value="Usuário" url="User.xhtml" rendered="#{loginController.logged}"/>
-				<p:menuitem value="Produto" url="#" />
-				<p:menuitem value="Fornecedor" url="#" />
-			</p:submenu>
+	<h:body>
+		<h:form id="frmMainMenu">
+			<p:menubar id="menuBar">
+				<p:submenu label="Cadastros" icon="ui-icon-pencil">
+					<p:menuitem value="Usuário" url="User.xhtml"
+						rendered="#{loginController.logged}" />
+					<p:menuitem value="Produto" url="#" />
+					<p:menuitem value="Fornecedor" url="#" />
+				</p:submenu>
 
-			<f:facet name="options">
-				<p:commandButton value="Sair" action="#{loginController.logout}"
-					icon="ui-icon-closethick" />
-			</f:facet>
-		</p:menubar>
-	</h:form>
+				<f:facet name="options">
+					<p:commandButton value="Sair" action="#{loginController.logout}"
+						icon="ui-icon-closethick" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</h:body>
 
 </ui:composition>
 

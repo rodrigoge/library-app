@@ -14,35 +14,42 @@
 		<title>Login | Livraria App</title>
 	</h:head>
 
-	<h:form>
-		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+	<h:body>
+		<h:form>
+			<h2>Login</h2>
 
-		<h2>Login</h2>
+			<p>
+				<p:inputText placeholder="Nome de usuário" id="username"
+					value="#{loginController.user.username}" required="true"
+					requiredMessage="Nome obrigatório." />
+			</p>
+			<p>
+				<p:password placeholder="Senha" id="password"
+					value="#{loginController.user.password}" required="true"
+					requiredMessage="Senha obrigatória.">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
+				</p:password>
+			</p>
+			<p>
+				<p:selectOneMenu id="typeuser"
+					value="#{loginController.user.typeuser}" required="true"
+					requiredMessage="Tipo de usuário é necessário">
+					<f:selectItem itemLabel="Selecione o tipo" itemValue="" />
+					<f:selectItems value="#{loginController.typeUser}" var="typeUser"
+						itemValue="#{typeUser}" itemLabel="#{typeUser.type}" />
+				</p:selectOneMenu>
+			</p>
 
-		<p>
-			<p:inputText placeholder="Nome de usuário" id="username"
-				value="#{loginController.user.username}" required="true"
-				requiredMessage="Nome obrigatório." />
-		</p>
-		<p>
-			<p:password placeholder="Senha" id="password"
-				value="#{loginController.user.password}" required="true"
-				requiredMessage="Senha obrigatória.">
-				<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
-			</p:password>
-		</p>
-		<p>
-			<p:selectOneMenu id="typeuser" value="#{loginController.user.typeuser}">
-				<f:selectItem itemLabel="Selecione o tipo" itemValue="" />
-				<f:selectItems value="#{loginController.typeUser}" var="typeUser"
-					itemValue="#{typeUser}" itemLabel="#{typeUser.type}" />
-			</p:selectOneMenu>
-		</p>
+			<p:commandButton value="Entrar" action="#{loginController.login}"
+				update="@all" />
+			<p:link value="Cadastre-se" href="User.xhtml" />
 
-		<p:commandButton value="Entrar" action="#{loginController.login}"
-			update="@all" />
-		<p:link value="Cadastre-se" href="User.xhtml" />
+		</h:form>
+		
+		<p:growl showDetail="false" showSummary="true" />
+	</h:body>
 
-	</h:form>
+
+
 
 </ui:composition>
