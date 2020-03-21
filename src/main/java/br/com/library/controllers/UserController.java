@@ -2,6 +2,7 @@ package br.com.library.controllers;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -26,6 +27,9 @@ public class UserController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private User user = new User();
+	private List<User> logged;
+	EntityManager data = DataConfiguration.getEntityManager();
+	private UserRepository userRepository = new UserRepository(data);
 	
 	public void init() {
 		if(this.user == null) {
@@ -38,21 +42,29 @@ public class UserController implements Serializable {
 		EntityTransaction transaction = data.getTransaction();
 		FacesContext context = FacesContext.getCurrentInstance();
 		
-		try {
-			transaction.begin();
-			UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
-			user.setPassword(DigestUtils.md5Hex(user.getPassword()));
-			userBusiness.save(user);
-			this.user = new User();
-			context.addMessage(null, new FacesMessage("Salvo com sucesso!"));
-			transaction.commit();
-		} catch (BusinessException e) {
-			transaction.rollback();
-			FacesMessage message = new FacesMessage(e.getMessage());
-			message.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, message);
-		}finally {
-			data.close();
+		logged = userRepository.searchUsername(user.getUsername());
+		
+		if(logged.isEmpty()) {
+			try {
+				transaction.begin();
+				UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
+				user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+				userBusiness.save(user);
+				this.user = new User();
+				context.addMessage(null, new FacesMessage("Salvo com sucesso!"));
+				transaction.commit();
+			} catch (BusinessException e) {
+				transaction.rollback();
+				FacesMessage message = new FacesMessage(e.getMessage());
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				context.addMessage(null, message);
+			}finally {
+				data.close();
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage( 
+					null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+					"Nome de usuário já existe", "Erro ao cadastrar!"));
 		}
 	}
 

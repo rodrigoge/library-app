@@ -32,6 +32,15 @@ public class UserRepository implements Serializable {
 				.setParameter("typeuser", typeuser);
 		return query.getResultList();
 	}
+	
+	//search for username from insert
+	public List<User> searchUsername(String username)
+	{
+		TypedQuery<User> query = data.createQuery(
+		"select u from User u where u.username = :username", User.class)
+		.setParameter("username", username);
+		return query.getResultList();
+	}
 
 	// search for all users
 	public List<User> all() {
