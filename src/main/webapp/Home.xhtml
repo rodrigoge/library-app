@@ -14,10 +14,10 @@
 		<title>Home | Livraria App</title>
 	</h:head>
 
-	<h:form>
-		<p:menubar>
+	<h:form id="frmMainMenu">
+		<p:menubar id="menuBar">
 			<p:submenu label="Cadastros" icon="ui-icon-pencil">
-				<p:menuitem value="Usuário" url="User.xhtml" />
+				<p:menuitem value="Usuário" url="User.xhtml" rendered="#{loginController.logged}"/>
 				<p:menuitem value="Produto" url="#" />
 				<p:menuitem value="Fornecedor" url="#" />
 			</p:submenu>

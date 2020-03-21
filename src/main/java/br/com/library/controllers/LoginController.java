@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import br.com.library.models.TypeUser;
 import br.com.library.models.User;
 import br.com.library.repositories.UserRepository;
 import br.com.library.utils.DataConfiguration;
@@ -28,8 +29,7 @@ public class LoginController implements Serializable {
 	private UserRepository userRepository = new UserRepository(data);
 	private List<User> allUsers = new ArrayList<User>();
 	private String username = "";
-	private String password = "";
-
+	
 	public void init() {
 		if (this.user == null) {
 			this.user = new User();
@@ -37,8 +37,8 @@ public class LoginController implements Serializable {
 	}
 
 	public String login() {
-		
-		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()));
+	
+		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()), user.getTypeuser());
 		
 		if (allUsers.isEmpty()) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -54,8 +54,13 @@ public class LoginController implements Serializable {
 			
 			return "/Home.faces?faces-redirect=true";
 		}
-		
-		
+	}
+	
+	public boolean isLogged() {
+		if (this.user.getTypeuser().equals("ADMINISTRADOR")) {
+			return true;
+		} else
+			return false;
 	}
 
 	public String logout() {
@@ -95,14 +100,8 @@ public class LoginController implements Serializable {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public TypeUser[] gettypeUser() {
+		return TypeUser.values();
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	
 
 }

@@ -24,11 +24,12 @@ public class UserRepository implements Serializable {
 		return data.find(User.class, id);
 	}
 
-	//search for users from login
-	public List<User> searchLogin(String username, String password) {
-		TypedQuery<User> query = data
-				.createQuery("select u from User u where u.username = :username and u.password = :password", User.class)
-				.setParameter("username", username).setParameter("password", password);
+	// search for users from login
+	public List<User> searchLogin(String username, String password, String typeuser) {
+		TypedQuery<User> query = data.createQuery(
+				"select u from User u where u.username = :username and u.password = :password and u.typeuser = :typeuser",
+				User.class).setParameter("username", username).setParameter("password", password)
+				.setParameter("typeuser", typeuser);
 		return query.getResultList();
 	}
 
