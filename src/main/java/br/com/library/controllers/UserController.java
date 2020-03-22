@@ -19,6 +19,7 @@ import br.com.library.models.TypeUser;
 import br.com.library.models.User;
 import br.com.library.repositories.UserRepository;
 import br.com.library.utils.DataConfiguration;
+import br.com.library.utils.JavaMail;
 
 @ManagedBean
 @RequestScoped
@@ -30,6 +31,7 @@ public class UserController implements Serializable {
 	private List<User> logged;
 	EntityManager data = DataConfiguration.getEntityManager();
 	private UserRepository userRepository = new UserRepository(data);
+	private JavaMail javaMail = new JavaMail();
 	
 	public void init() {
 		if(this.user == null) {
@@ -65,6 +67,23 @@ public class UserController implements Serializable {
 			FacesContext.getCurrentInstance().addMessage( 
 					null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 					"Nome de usuário já existe", "Erro ao cadastrar!"));
+		}
+	}
+	
+	public String recoveryPassword() {
+		logged = userRepository.searchEmail(user.getEmail());
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		if (logged.isEmpty()) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email não existe", "Erro"));
+			return null;
+			
+		} else {
+			context.addMessage(null, new FacesMessage("Um email foi enviado para o " + user.getEmail()));
+			javaMail.sendEmail();
+
+			return "";
 		}
 	}
 

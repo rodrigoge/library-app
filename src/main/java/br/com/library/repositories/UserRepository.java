@@ -24,24 +24,6 @@ public class UserRepository implements Serializable {
 		return data.find(User.class, id);
 	}
 
-	// search for users from login
-	public List<User> searchLogin(String username, String password, String typeuser) {
-		TypedQuery<User> query = data.createQuery(
-				"select u from User u where u.username = :username and u.password = :password and u.typeuser = :typeuser",
-				User.class).setParameter("username", username).setParameter("password", password)
-				.setParameter("typeuser", typeuser);
-		return query.getResultList();
-	}
-	
-	//search for username from insert
-	public List<User> searchUsername(String username)
-	{
-		TypedQuery<User> query = data.createQuery(
-		"select u from User u where u.username = :username", User.class)
-		.setParameter("username", username);
-		return query.getResultList();
-	}
-
 	// search for all users
 	public List<User> all() {
 		TypedQuery<User> query = data.createQuery("from User u order by u.id", User.class);
@@ -61,6 +43,31 @@ public class UserRepository implements Serializable {
 	// remove user
 	public void delete(User user) {
 		this.data.remove(user);
+	}
+	
+	// search for users from login
+	public List<User> searchLogin(String username, String password, String typeuser) {
+		TypedQuery<User> query = data.createQuery(
+				"select u from User u where u.username = :username and u.password = :password and u.typeuser = :typeuser",
+				User.class).setParameter("username", username).setParameter("password", password)
+				.setParameter("typeuser", typeuser);
+		return query.getResultList();
+	}
+	
+	//search for username from insert
+	public List<User> searchUsername(String username)
+	{
+		TypedQuery<User> query = data.createQuery(
+		"select u from User u where u.username = :username", User.class)
+		.setParameter("username", username);
+		return query.getResultList();
+	}
+	
+	//search for user from email
+	public List<User> searchEmail(String email){
+		TypedQuery<User> query = data.createQuery("select u from User u where u.email = :email", User.class)
+				.setParameter("email", email);
+		return query.getResultList();
 	}
 
 }

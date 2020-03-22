@@ -45,12 +45,10 @@ public class LoginController implements Serializable {
 
 		if (allUsers.isEmpty()) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário ou senha incorretos.", "Erro"));
-			context.getExternalContext().getFlash().setKeepMessages(true); 
 			return null;
 			
 		} else {
 			context.addMessage(null, new FacesMessage("Login efetuado com sucesso."));
-			context.getExternalContext().getFlash().setKeepMessages(true);
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
 					.getSession(false);
 			if (session != null) {

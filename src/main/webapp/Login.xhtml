@@ -39,17 +39,19 @@
 						itemValue="#{typeUser}" itemLabel="#{typeUser.type}" />
 				</p:selectOneMenu>
 			</p>
-
-			<p:commandButton value="Entrar" action="#{loginController.login}"
-				update="@all" />
-			<p:link value="Cadastre-se" href="User.xhtml" />
+			<p>
+				<p:commandButton value="Entrar" action="#{loginController.login}"
+					update="@all" />
+			</p>
+			<p>	
+				<p:link value="Cadastre-se" href="User.xhtml" />
+			</p>
+			<p>
+				<p:link value="Esqueceu sua senha?" href="Recover.xhtml" />
+			</p>
 
 		</h:form>
 		
 		<p:growl showDetail="false" showSummary="true" />
 	</h:body>
-
-
-
-
 </ui:composition>

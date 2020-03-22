@@ -109,6 +109,13 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		<!-- Send email -->
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version>
+		</dependency>
 
 	</dependencies>
 
