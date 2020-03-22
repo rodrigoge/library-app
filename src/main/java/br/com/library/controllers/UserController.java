@@ -81,7 +81,7 @@ public class UserController implements Serializable {
 			
 		} else {
 			context.addMessage(null, new FacesMessage("Um email foi enviado para o " + user.getEmail()));
-			javaMail.sendEmail();
+			javaMail.sendEmail(user.getEmail());
 
 			return "";
 		}
@@ -94,7 +94,7 @@ public class UserController implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public TypeUser[] gettypeUser() {
 		return TypeUser.values();
 	}
