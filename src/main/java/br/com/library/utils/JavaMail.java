@@ -25,7 +25,6 @@ public class JavaMail {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "465");
 		
-		
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				//parameters of who is sending
@@ -42,11 +41,12 @@ public class JavaMail {
 
 			//receptors for message
 			InternetAddress[] toUser = InternetAddress.parse(toEmail);
-			
+
 			//content email
 			message.setRecipients(Message.RecipientType.TO, toUser);
 			message.setSubject("Recuperação de senha | Library App");
-			message.setText("Seu nova senha é 12345");
+			String link = "Para alterar sua senha clique <a href='../Update.xhtml'>aqui</a>";
+			message.setText(link);
 
 			Transport.send(message);
 
