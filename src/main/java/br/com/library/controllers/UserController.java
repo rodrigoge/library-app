@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -26,27 +27,28 @@ import br.com.library.utils.JavaMail;
 public class UserController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private User user = new User();
 	private List<User> logged;
+	private User username = new User();
 	EntityManager data = DataConfiguration.getEntityManager();
 	private UserRepository userRepository = new UserRepository(data);
 	private JavaMail javaMail = new JavaMail();
-	
+
 	public void init() {
-		if(this.user == null) {
+		if (this.user == null) {
 			this.user = new User();
 		}
 	}
-	
-	public void save() throws IOException{
+
+	public void save() throws IOException {
 		EntityManager data = DataConfiguration.getEntityManager();
 		EntityTransaction transaction = data.getTransaction();
 		FacesContext context = FacesContext.getCurrentInstance();
-		
+
 		logged = userRepository.searchUsername(user.getUsername());
-		
-		if(logged.isEmpty()) {
+
+		if (logged.isEmpty()) {
 			try {
 				transaction.begin();
 				UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
@@ -60,31 +62,60 @@ public class UserController implements Serializable {
 				FacesMessage message = new FacesMessage(e.getMessage());
 				message.setSeverity(FacesMessage.SEVERITY_ERROR);
 				context.addMessage(null, message);
-			}finally {
+			} finally {
 				data.close();
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage( 
-					null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-					"Nome de usuário já existe", "Erro ao cadastrar!"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário já existe", "Erro ao cadastrar!"));
 		}
 	}
-	
+
 	public String recoveryPassword() {
 		logged = userRepository.searchEmail(user.getEmail());
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (logged.isEmpty()) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email não existe", "Erro"));
 			return null;
-			
+
 		} else {
 			context.addMessage(null, new FacesMessage("Um email foi enviado para o " + user.getEmail()));
 			javaMail.sendEmail(user.getEmail());
 
 			return "";
 		}
+	}
+	
+	public void updatePassword() throws IOException, BusinessException {
+		EntityManager data = DataConfiguration.getEntityManager();
+		EntityTransaction transaction = data.getTransaction();
+		FacesContext context = FacesContext.getCurrentInstance();
+
+		username = userRepository.indexName(user.getUsername());
+		
+		if(username != null && username.getUsername().equals(user.getUsername())) {
+			try {
+				transaction.begin();
+				UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
+				username.setPassword(DigestUtils.md5Hex(user.getPassword()));
+				userBusiness.save(username);
+				context.addMessage(null, new FacesMessage("Salvo com sucesso!"));
+				transaction.commit();
+
+			} catch (NoResultException e) {
+				transaction.rollback();
+				FacesMessage message = new FacesMessage(e.getMessage());
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				context.addMessage(null, new FacesMessage("Usuário não existe."));
+			
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário já existe", "Erro ao cadastrar!"));
+		}
+		
 	}
 
 	public User getUser() {
@@ -93,6 +124,14 @@ public class UserController implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public User getUsername() {
+		return username;
+	}
+
+	public void setUsername(User username) {
+		this.username = username;
 	}
 
 	public TypeUser[] gettypeUser() {

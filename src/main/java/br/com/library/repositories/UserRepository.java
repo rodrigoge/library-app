@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import br.com.library.models.User;
@@ -44,7 +45,7 @@ public class UserRepository implements Serializable {
 	public void delete(User user) {
 		this.data.remove(user);
 	}
-	
+
 	// search for users from login
 	public List<User> searchLogin(String username, String password, String typeuser) {
 		TypedQuery<User> query = data.createQuery(
@@ -53,21 +54,31 @@ public class UserRepository implements Serializable {
 				.setParameter("typeuser", typeuser);
 		return query.getResultList();
 	}
-	
-	//search for username from insert
-	public List<User> searchUsername(String username)
-	{
-		TypedQuery<User> query = data.createQuery(
-		"select u from User u where u.username = :username", User.class)
-		.setParameter("username", username);
+
+	// search for username from insert
+	public List<User> searchUsername(String username) {
+		TypedQuery<User> query = data.createQuery("select u from User u where u.username = :username", User.class)
+				.setParameter("username", username);
 		return query.getResultList();
 	}
-	
-	//search for user from email
-	public List<User> searchEmail(String email){
+
+	// search for user from email
+	public List<User> searchEmail(String email) {
 		TypedQuery<User> query = data.createQuery("select u from User u where u.email = :email", User.class)
 				.setParameter("email", email);
 		return query.getResultList();
+	}
+
+	// search for a user
+	public User indexName(String username) {
+		TypedQuery<User> query = data.createQuery("select u from User u where u.username = :username", User.class)
+				.setParameter("username", username);
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

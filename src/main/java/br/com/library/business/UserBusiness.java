@@ -24,5 +24,4 @@ public class UserBusiness implements Serializable {
 		user = this.users.index(user.getId());
 		this.users.delete(user);
 	}
-
 }

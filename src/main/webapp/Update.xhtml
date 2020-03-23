@@ -4,24 +4,53 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{userController.user}" />
+		<f:viewAction action="#{userController.init}" />
+	</f:metadata>
+
 	<h:head>
 		<title>Atualização de senha | Livraria App</title>
 	</h:head>
-	
+
 	<h:body>
 		<h:form>
 			<h2>Atualização de senha</h2>
+
 			<p>
-				<p:password placeholder="Senha" id="password"
-					value="#{loginController.user.password}" required="true"
+				<p:inputText placeholder="Nome de usuário" id="username"
+					value="#{userController.user.username}" required="true"
+					requiredMessage="Nome de usuário obrigatório.">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i" />
+				</p:inputText>
+			</p>
+
+			<p>
+				<p:password placeholder="Digite sua senha" id="passwordAuth"
+					required="true" match="password"
 					requiredMessage="Senha obrigatória.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
 				</p:password>
 			</p>
 
+			<p>
+				<p:password placeholder="Confirme sua senha" id="password"
+					value="#{userController.user.password}" required="true"
+					requiredMessage="Senha obrigatória.">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
+				</p:password>
+			</p>
+
+			<p>
+				<p:commandButton value="Atualizar senha"
+					action="#{userController.updatePassword}" update="@all">
+					<f:param name="id" value="#{userController.user.id}" />
+				</p:commandButton>
+			</p>
+
 		</h:form>
-		
+
 		<p:growl showDetail="false" showSummary="true" />
 	</h:body>
 </ui:composition>
