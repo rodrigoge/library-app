@@ -69,7 +69,7 @@ public class UserRepository implements Serializable {
 		return query.getResultList();
 	}
 
-	// search for a user
+	//search for a user
 	public User indexName(String username) {
 		TypedQuery<User> query = data.createQuery("select u from User u where u.username = :username", User.class)
 				.setParameter("username", username);
@@ -80,5 +80,6 @@ public class UserRepository implements Serializable {
 			return null;
 		}
 	}
+	
 
 }
