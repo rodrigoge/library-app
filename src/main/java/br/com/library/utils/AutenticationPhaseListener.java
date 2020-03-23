@@ -24,13 +24,15 @@ public class AutenticationPhaseListener implements PhaseListener{
 		UIViewRoot ui = context.getViewRoot();
 		String pageLogin = ui.getViewId();
 		String pageUser = ui.getViewId();
+		String pageRecover = ui.getViewId();
 		String pageUpdate = ui.getViewId();
 		
 		boolean pageAuthLogin = pageLogin.contains("/Login.xhtml");
 		boolean pageAuthUser = pageUser.contains("/User.xhtml");
-		boolean pageAuthUpdate = pageUpdate.contains("/Recover.xhtml");
+		boolean pageAuthRecover = pageRecover.contains("/Recover.xhtml");
+		boolean pageAuthUpdate = pageUpdate.contains("/Update.xhtml");
 		
-		if(!pageAuthLogin && !pageAuthUser && !pageAuthUpdate) {
+		if(!pageAuthLogin && !pageAuthUser && !pageAuthRecover && !pageAuthUpdate) {
 			ExternalContext externalContext = context.getExternalContext();
 			Map<String, Object> map = externalContext.getSessionMap();
 			LoginController loginController = (LoginController) map.get("loginController");

@@ -1,12 +1,14 @@
 package br.com.library.utils;
 
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 
 import br.com.library.models.User;
@@ -14,6 +16,7 @@ import br.com.library.models.User;
 public class JavaMail {
 	
 	private User user = new User();
+	String text;
 	
 	public void sendEmail(String toEmail) {
 		
@@ -38,15 +41,19 @@ public class JavaMail {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("admin@admin.com.br"));
-
+			
 			//receptors for message
 			InternetAddress[] toUser = InternetAddress.parse(toEmail);
 
 			//content email
+			MimeBodyPart messageBodyPart = new MimeBodyPart();
+	        messageBodyPart.setText(text, "utf-8", "html");
 			message.setRecipients(Message.RecipientType.TO, toUser);
 			message.setSubject("Recuperação de senha | Library App");
-			String link = "Para alterar sua senha clique <a href='../Update.xhtml'>aqui</a>";
-			message.setText(link);
+			text = "<p>Olá, se você recebeu este email é porque foi solicitada uma alteração de sua senha no cadastro do <b>Library App</b>.</p> "
+					+ "<p>Para alterar sua senha clique <a href='http://localhost:8080/library-app/Update.xhtml'>aqui.</a></p>"
+					+ "<p>Caso não tenha solicitado nenhuma alteração, desconsidere este email.</p>";
+			message.setContent(text, "text/html");
 
 			Transport.send(message);
 
