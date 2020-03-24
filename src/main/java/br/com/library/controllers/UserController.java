@@ -70,7 +70,8 @@ public class UserController implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário já existe", "Erro ao cadastrar!"));
 		}
 	}
-
+	
+	
 	public String recoveryPassword() {
 		logged = userRepository.searchEmail(user.getEmail());
 
@@ -83,7 +84,6 @@ public class UserController implements Serializable {
 		} else {
 			context.addMessage(null, new FacesMessage("Um email foi enviado para o " + user.getEmail()));
 			javaMail.sendEmail(user.getEmail());
-
 			return "";
 		}
 	}

@@ -35,7 +35,7 @@ public class JavaMail {
 			}
 		});
 		
-		session.setDebug(true);
+		//session.setDebug(true);
 
 		try {
 
@@ -56,6 +56,8 @@ public class JavaMail {
 			message.setContent(text, "text/html");
 
 			Transport.send(message);
+			
+			
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
