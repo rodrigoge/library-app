@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{userController.user}" />
-		<f:viewAction action="#{userController.init}" />
+		<f:viewParam name="id" value="#{createUserController.user}" />
+		<f:viewAction action="#{createUserController.init}" />
 	</f:metadata>
 
 	<h:head>
@@ -20,13 +20,13 @@
 
 			<p>
 				<p:inputText placeholder="Email" id="email"
-					value="#{userController.user.email}">
+					value="#{createUserController.user.email}">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
 				</p:inputText>
 			</p>
 
 			<p:commandButton value="Entrar"
-				action="#{userController.recoveryPassword}" update="@all" />
+				action="#{createUserController.recoveryPassword}" update="@all" />
 
 			<p>Aguarde alguns segundos até confirmação de envio do email.</p>
 			

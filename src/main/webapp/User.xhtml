@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{userController.user}" />
-		<f:viewAction action="#{userController.init}" />
+		<f:viewParam name="id" value="#{createUserController.user}" />
+		<f:viewAction action="#{createUserController.init}" />
 	</f:metadata>
 
 	<h:head>
@@ -22,33 +22,33 @@
 
 			<p>
 				<p:inputText placeholder="Nome completo" id="fullname"
-					value="#{userController.user.fullname}" required="true"
+					value="#{createUserController.user.fullname}" required="true"
 					requiredMessage="Nome obrigatório." />
 
 				<p:inputText placeholder="Endereço" id="address"
-					value="#{userController.user.address}" required="true"
+					value="#{createUserController.user.address}" required="true"
 					requiredMessage="Endereço obrigatório" />
 			</p>
 
 			<p>
 				<p:inputMask placeholder="Telefone" id="phone"
-					value="#{userController.user.phone}" mask="(99) 99999-9999" />
+					value="#{createUserController.user.phone}" mask="(99) 99999-9999" />
 
 				<p:inputText placeholder="Email" id="email"
-					value="#{userController.user.email}">
+					value="#{createUserController.user.email}">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
 				</p:inputText>
 			</p>
 
 			<p>
 				<p:inputText placeholder="Nome de usuário" id="username"
-					value="#{userController.user.username}" required="true"
+					value="#{createUserController.user.username}" required="true"
 					requiredMessage="Nome de usuário obrigatório.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i" />
 				</p:inputText>
 
 				<p:password placeholder="Senha" id="password"
-					value="#{userController.user.password}" feedback="true"
+					value="#{createUserController.user.password}" feedback="true"
 					promptLabel="Força da senha" weakLabel="Senha fraca"
 					goodLabel="Senha média" strongLabel="Senha forte" required="true"
 					requiredMessage="Senha obrigatória.">
@@ -57,18 +57,17 @@
 			</p>
 
 			<p>
-				<p:inputText placeholder="Tipo de usuário" id="typeuser" value="#{userController.user.typeuser}" /> 
 				<h:outputText value="Tipo de usuário:" />
 				<p:selectOneButton id="typeuser"
-					value="#{userController.user.typeuser}" required="true"
+					value="#{createUserController.user.typeuser}" required="true"
 					requiredMessage="Tipo de usuário obrigatório.">
-					<f:selectItems value="#{userController.typeUser}" var="typeruser"
+					<f:selectItems value="#{createUserController.typeUser}" var="typeruser"
 						itemValue="#{typeuser}" itemLabel="#{typeuser.type}" />
 
 				</p:selectOneButton>
 			</p>
 
-			<p:commandButton value="Salvar" action="#{userController.save}"
+			<p:commandButton value="Salvar" action="#{createUserController.save}"
 				update="@form" />
 
 		</h:form>

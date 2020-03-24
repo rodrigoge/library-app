@@ -24,7 +24,7 @@ import br.com.library.utils.JavaMail;
 
 @ManagedBean
 @RequestScoped
-public class UserController implements Serializable {
+public class CreateUserController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -70,7 +70,6 @@ public class UserController implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário já existe", "Erro ao cadastrar!"));
 		}
 	}
-	
 	
 	public String recoveryPassword() {
 		logged = userRepository.searchEmail(user.getEmail());
