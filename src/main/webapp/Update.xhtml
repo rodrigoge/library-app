@@ -17,9 +17,6 @@
 	<h:body>
 		<h:form>
 			<h2>Atualização de usuários</h2>
-
-			<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
-
 			<p>
 				<p:inputText placeholder="Nome completo" id="fullname"
 					value="#{editUserController.user.fullname}" required="true"
@@ -70,9 +67,12 @@
 			<p:commandButton value="Atualizar" action="#{editUserController.update}"
 				update="@all" />
 			
-			<p:commandButton value="Voltar" update="@all" onclick="history.go(-1);"/>
+			<p:commandButton value="Voltar" update="@all" onclick="window.location.href='ListUser.xhtml'"/>
 
 		</h:form>
+		
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+		
 	</h:body>
 </ui:composition>
 

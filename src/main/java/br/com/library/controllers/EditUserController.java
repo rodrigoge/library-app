@@ -54,6 +54,7 @@ public class EditUserController implements Serializable {
 		EntityTransaction transaction = data.getTransaction();
 		FacesContext faces = FacesContext.getCurrentInstance();
 		
+		
 		try {
 			transaction.begin();
 			UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
@@ -61,8 +62,8 @@ public class EditUserController implements Serializable {
 			userBusiness.save(user);
 			this.user = new User();
 			faces.addMessage(null, new FacesMessage("Atualizado com sucesso."));
-			this.search();
 			transaction.commit();
+			this.search();
 			
 		} catch (BusinessException e) {
 			transaction.rollback();

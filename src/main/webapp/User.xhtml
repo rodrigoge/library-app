@@ -17,9 +17,6 @@
 	<h:body>
 		<h:form>
 			<h2>Cadastro de usuários</h2>
-
-			<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
-
 			<p>
 				<p:inputText placeholder="Nome completo" id="fullname"
 					value="#{createUserController.user.fullname}" required="true"
@@ -71,6 +68,8 @@
 				update="@form" />
 
 		</h:form>
+		
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
 	</h:body>
 </ui:composition>
 
