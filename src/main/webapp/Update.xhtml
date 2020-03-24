@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{createUserController.user}" />
-		<f:viewAction action="#{createUserController.init}" />
+		<f:viewParam name="id" value="#{editUserController.user}" />
+		<f:viewAction action="#{editUserController.init}" />
 	</f:metadata>
 
 	<h:head>
@@ -20,15 +20,15 @@
 
 			<p>
 				<p:inputText placeholder="Nome de usuário" id="username"
-					value="#{createUserController.user.username}" required="true"
+					value="#{editUserController.user.username}" required="true"
 					requiredMessage="Nome de usuário obrigatório.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i" />
 				</p:inputText>
 			</p>
 
 			<p>
-				<p:password placeholder="Confirme sua senha" id="password"
-					value="#{createUserController.user.password}" required="true"
+				<p:password placeholder="Senha" id="password"
+					value="#{editUserController.user.password}" required="true"
 					requiredMessage="Senha obrigatória.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
 				</p:password>
@@ -36,8 +36,8 @@
 
 			<p>
 				<p:commandButton value="Atualizar senha"
-					action="#{createUserController.updatePassword}" update="@all">
-					<f:param name="id" value="#{createUserController.user.id}" />
+					action="#{editUserController.updatePassword}" update="@all">
+					<f:param name="id" value="#{editUserController.user.id}" />
 				</p:commandButton>
 			</p>
 
