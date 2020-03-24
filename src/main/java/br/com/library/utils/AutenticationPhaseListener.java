@@ -30,7 +30,7 @@ public class AutenticationPhaseListener implements PhaseListener{
 		boolean pageAuthLogin = pageLogin.contains("/Login.xhtml");
 		boolean pageAuthUser = pageUser.contains("/User.xhtml");
 		boolean pageAuthRecover = pageRecover.contains("/Recover.xhtml");
-		boolean pageAuthUpdate = pageUpdate.contains("/Update.xhtml");
+		boolean pageAuthUpdate = pageUpdate.contains("/UpdatePassword.xhtml");
 		
 		if(!pageAuthLogin && !pageAuthUser && !pageAuthRecover && !pageAuthUpdate) {
 			ExternalContext externalContext = context.getExternalContext();

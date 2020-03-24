@@ -11,12 +11,34 @@
 	</f:metadata>
 
 	<h:head>
-		<title>Atualização de senha | Livraria App</title>
+		<title>Atualização de usuário</title>
 	</h:head>
 
 	<h:body>
 		<h:form>
-			<h2>Atualização de senha</h2>
+			<h2>Atualização de usuários</h2>
+
+			<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+
+			<p>
+				<p:inputText placeholder="Nome completo" id="fullname"
+					value="#{editUserController.user.fullname}" required="true"
+					requiredMessage="Nome obrigatório." />
+
+				<p:inputText placeholder="Endereço" id="address"
+					value="#{editUserController.user.address}" required="true"
+					requiredMessage="Endereço obrigatório" />
+			</p>
+
+			<p>
+				<p:inputMask placeholder="Telefone" id="phone"
+					value="#{editUserController.user.phone}" mask="(99) 99999-9999" />
+
+				<p:inputText placeholder="Email" id="email"
+					value="#{editUserController.user.email}">
+					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
+				</p:inputText>
+			</p>
 
 			<p>
 				<p:inputText placeholder="Nome de usuário" id="username"
@@ -24,25 +46,33 @@
 					requiredMessage="Nome de usuário obrigatório.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i" />
 				</p:inputText>
-			</p>
 
-			<p>
 				<p:password placeholder="Senha" id="password"
-					value="#{editUserController.user.password}" required="true"
+					value="#{editUserController.user.password}" feedback="true"
+					promptLabel="Força da senha" weakLabel="Senha fraca"
+					goodLabel="Senha média" strongLabel="Senha forte" required="true"
 					requiredMessage="Senha obrigatória.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@*()%$!]/i" />
 				</p:password>
 			</p>
 
 			<p>
-				<p:commandButton value="Atualizar senha"
-					action="#{editUserController.updatePassword}" update="@all">
-					<f:param name="id" value="#{editUserController.user.id}" />
-				</p:commandButton>
+				<h:outputText value="Tipo de usuário:" />
+				<p:selectOneButton id="typeuser"
+					value="#{editUserController.user.typeuser}" required="true"
+					requiredMessage="Tipo de usuário obrigatório.">
+					<f:selectItems value="#{editUserController.typeUser}" var="typeruser"
+						itemValue="#{typeuser}" itemLabel="#{typeuser.type}" />
+
+				</p:selectOneButton>
 			</p>
 
-		</h:form>
+			<p:commandButton value="Atualizar" action="#{editUserController.update}"
+				update="@all" />
+			
+			<p:commandButton value="Voltar" update="@all" onclick="history.go(-1);"/>
 
-		<p:growl showDetail="false" showSummary="true" />
+		</h:form>
 	</h:body>
 </ui:composition>
+

@@ -23,6 +23,11 @@
 					<p:menuitem value="Produto" url="#" />
 					<p:menuitem value="Fornecedor" url="#" />
 				</p:submenu>
+				
+				<p:submenu label="Listas" icon="ui-icon-pencil">
+					<p:menuitem value="Usuário" url="ListUser.xhtml"
+						rendered="#{loginController.logged}" />
+				</p:submenu>
 
 				<f:facet name="options">
 					<p:commandButton value="Sair" action="#{loginController.logout}"

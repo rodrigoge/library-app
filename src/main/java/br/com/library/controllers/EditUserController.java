@@ -16,6 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import br.com.library.business.UserBusiness;
 import br.com.library.business.exception.BusinessException;
+import br.com.library.models.TypeUser;
 import br.com.library.models.User;
 import br.com.library.repositories.UserRepository;
 import br.com.library.utils.DataConfiguration;
@@ -28,6 +29,7 @@ public class EditUserController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private User user = new User();
+	private User userSelected;
 	private List<User> logged;
 	private User username = new User();
 	EntityManager data = DataConfiguration.getEntityManager();
@@ -37,6 +39,61 @@ public class EditUserController implements Serializable {
 	public void init() {
 		if (this.user == null) {
 			this.user = new User();
+		}
+	}
+	
+	public void search() {
+		EntityManager data = DataConfiguration.getEntityManager();
+		UserRepository logged = new UserRepository(data);
+		this.logged = logged.all();
+		data.close();
+	}
+	
+	public void update() {
+		EntityManager data = DataConfiguration.getEntityManager();
+		EntityTransaction transaction = data.getTransaction();
+		FacesContext faces = FacesContext.getCurrentInstance();
+		
+		try {
+			transaction.begin();
+			UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
+			user.setPassword(DigestUtils.md5Hex(user.getPassword()));
+			userBusiness.save(user);
+			this.user = new User();
+			faces.addMessage(null, new FacesMessage("Atualizado com sucesso."));
+			this.search();
+			transaction.commit();
+			
+		} catch (BusinessException e) {
+			transaction.rollback();
+			FacesMessage message = new FacesMessage(e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			faces.addMessage(null, message);
+		}finally{
+			data.close();
+		}
+	}
+	
+	public void delete() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		EntityManager data = DataConfiguration.getEntityManager();
+		EntityTransaction transaction = data.getTransaction();
+		
+		UserBusiness userBusiness = new UserBusiness(new UserRepository(data));
+		
+		try {
+			transaction.begin();
+			userBusiness.remove(this.userSelected);
+			context.addMessage(null, new FacesMessage("Usuário excluido."));
+			transaction.commit();
+			this.search();
+		} catch (BusinessException e) {
+			transaction.rollback();
+			FacesMessage message = new FacesMessage(e.getMessage());
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, message); 
+		}finally {
+			data.close();
 		}
 	}
 	
@@ -83,7 +140,6 @@ public class EditUserController implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário já existe", "Erro ao cadastrar!"));
 		}
-		
 	}
 
 	public User getUser() {
@@ -117,7 +173,20 @@ public class EditUserController implements Serializable {
 	public void setJavaMail(JavaMail javaMail) {
 		this.javaMail = javaMail;
 	}
-	
-	
 
+	public List<User> getLogged() {
+		return logged;
+	}
+
+	public User getUserSelected() {
+		return userSelected;
+	}
+
+	public void setUserSelected(User userSelected) {
+		this.userSelected = userSelected;
+	}
+	
+	public TypeUser[] gettypeUser() {
+		return TypeUser.values();
+	}
 }
