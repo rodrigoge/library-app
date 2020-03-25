@@ -14,6 +14,8 @@ import javax.persistence.EntityTransaction;
 import br.com.library.business.ProviderBusiness;
 import br.com.library.business.exception.BusinessException;
 import br.com.library.models.Provider;
+import br.com.library.models.TypeUser;
+import br.com.library.models.User;
 import br.com.library.repositories.ProviderRepository;
 import br.com.library.utils.DataConfiguration;
 
@@ -22,7 +24,7 @@ import br.com.library.utils.DataConfiguration;
 public class ProviderController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Provider provider = new Provider();
 	private Provider providerSelected = new Provider();
 	private List<Provider> providers;
@@ -139,7 +141,5 @@ public class ProviderController implements Serializable {
 	public void setProviderRepository(ProviderRepository providerRepository) {
 		this.providerRepository = providerRepository;
 	}
-	
-	
 
 }
