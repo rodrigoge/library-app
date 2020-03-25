@@ -66,6 +66,8 @@
 
 			<p:commandButton value="Salvar" action="#{createUserController.save}"
 				update="@form" />
+				
+			<p:commandButton value="Voltar" update="@all" onclick="window.history.go(-1);"/>
 
 		</h:form>
 		

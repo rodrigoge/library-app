@@ -6,27 +6,25 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.persistence.EntityManager;
 
-import br.com.library.models.User;
-import br.com.library.repositories.UserRepository;
+import br.com.library.models.Provider;
+import br.com.library.repositories.ProviderRepository;
 import br.com.library.utils.DataConfiguration;
 
-@FacesConverter(forClass = User.class)
-public class UserCoverter implements Converter{
-
+@FacesConverter(forClass = Provider.class)
+public class ProviderConverter implements Converter{
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		User user = null;
+		Provider provider = null;
 		EntityManager data = DataConfiguration.getEntityManager();
 		
-		//check the id of user for the insert
 		try {
 			if(value != null && !"".equals(value)) {
-				user = new UserRepository(data).index(new Long(value));
+				provider = new ProviderRepository(data).index(new Long(value));
 			}
 			
-			return user;
-			
+			return provider;
 		}finally {
 			data.close();
 		}
@@ -35,11 +33,11 @@ public class UserCoverter implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			User user = ((User) value);
-			return user.getId() == null ? null : user.getId().toString();
+			Provider provider = ((Provider) value);
+			return provider.getId() == null ? null : provider.getId().toString();
 		}
 		
 		return null;
 	}
-	
+
 }

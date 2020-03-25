@@ -36,17 +36,18 @@ public class LoginController implements Serializable {
 		}
 	}
 
-	public String login()  {
+	public String login() {
 
 		allUsers = userRepository.searchLogin(user.getUsername(), DigestUtils.md5Hex(user.getPassword()),
 				user.getTypeuser());
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (allUsers.isEmpty()) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário ou senha incorretos.", "Erro"));
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nome de usuário ou senha incorretos.", "Erro"));
 			return null;
-			
+
 		} else {
 			context.addMessage(null, new FacesMessage("Login efetuado com sucesso."));
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
