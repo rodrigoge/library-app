@@ -27,10 +27,10 @@ public class AutenticationPhaseListener implements PhaseListener{
 		String pageRecover = ui.getViewId();
 		String pageUpdate = ui.getViewId();
 		
-		boolean pageAuthLogin = pageLogin.contains("/Login.xhtml");
-		boolean pageAuthUser = pageUser.contains("/User.xhtml");
-		boolean pageAuthRecover = pageRecover.contains("/Recover.xhtml");
-		boolean pageAuthUpdate = pageUpdate.contains("/UpdatePassword.xhtml");
+		boolean pageAuthLogin = pageLogin.contains("/pages/users/Login.xhtml");
+		boolean pageAuthUser = pageUser.contains("/pages/users/User.xhtml");
+		boolean pageAuthRecover = pageRecover.contains("/pages/users/Recover.xhtml");
+		boolean pageAuthUpdate = pageUpdate.contains("/pages/users/UpdatePassword.xhtml");
 		
 		if(!pageAuthLogin && !pageAuthUser && !pageAuthRecover && !pageAuthUpdate) {
 			ExternalContext externalContext = context.getExternalContext();
@@ -41,7 +41,7 @@ public class AutenticationPhaseListener implements PhaseListener{
 			if(allUsers.isEmpty()) {
 				Application app = context.getApplication();
 				NavigationHandler navigation = app.getNavigationHandler();
-				navigation.handleNavigation(context, null, "/Login.xhtml?faces-redirect=true");
+				navigation.handleNavigation(context, null, "/pages/users/Login.xhtml?faces-redirect=true");
 			}
 		}
 	}

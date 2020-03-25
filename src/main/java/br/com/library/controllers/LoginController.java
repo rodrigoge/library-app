@@ -56,7 +56,7 @@ public class LoginController implements Serializable {
 				session.setAttribute("username", allUsers);
 			}
 
-			return "/Home.faces?faces-redirect=true";
+			return "/pages/users/Home.faces?faces-redirect=true";
 		}
 	}
 
@@ -69,7 +69,7 @@ public class LoginController implements Serializable {
 
 	public String logout() {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/Login?faces-redirect=true";
+		return "/pages/users/Login?faces-redirect=true";
 	}
 
 	public User getUser() {
