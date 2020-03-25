@@ -43,11 +43,9 @@
 				</p:column>
 
 				<p:column headerText="Ações" width="35">
-					<p:commandButton title="Alterar" value="Alterar"
-						action="#{editProviderController.update}" update="@form">
-						<f:setPropertyActionListener value="#{provider}"
-							target="#{editProviderController.providerSelected}" />
-					</p:commandButton>
+					<p:button title="Alterar" value="Alterar" outcome="/pages/providers/UpdateProvider.xhtml">
+						<f:param name="id" value="#{provider.id}" />
+					</p:button>
 
 					<p:commandButton title="Excluir" value="Excluir"
 						action="#{editProviderController.delete}" update="@form">
@@ -58,7 +56,7 @@
 			</p:dataTable>
 
 			<p:commandButton value="Voltar" update="@all"
-				onclick="window.history.go(-1);" />
+				onclick="window.location.href='../users/Home.xhtml'" />
 
 			<p:autoUpdate disabled="false" />
 		</h:form>
