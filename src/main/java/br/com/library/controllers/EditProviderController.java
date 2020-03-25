@@ -1,12 +1,11 @@
 package br.com.library.controllers;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -14,17 +13,15 @@ import javax.persistence.EntityTransaction;
 import br.com.library.business.ProviderBusiness;
 import br.com.library.business.exception.BusinessException;
 import br.com.library.models.Provider;
-import br.com.library.models.TypeUser;
-import br.com.library.models.User;
 import br.com.library.repositories.ProviderRepository;
 import br.com.library.utils.DataConfiguration;
 
 @ManagedBean
-@RequestScoped
-public class ProviderController implements Serializable {
-
+@ViewScoped
+public class EditProviderController implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private Provider provider = new Provider();
 	private Provider providerSelected = new Provider();
 	private List<Provider> providers;
@@ -34,28 +31,6 @@ public class ProviderController implements Serializable {
 	public void init() {
 		if(this.provider == null) {
 			this.provider = new Provider();
-		}
-	}
-	
-	public void save() throws IOException {
-		EntityManager data = DataConfiguration.getEntityManager();
-		EntityTransaction transaction = data.getTransaction();
-		FacesContext context = FacesContext.getCurrentInstance();
-		
-		try {
-			transaction.begin();
-			ProviderBusiness providerBusiness = new ProviderBusiness(new ProviderRepository(data));
-			providerBusiness.save(provider);
-			this.provider = new Provider();
-			context.addMessage(null, new FacesMessage("Fornecedor salvo com sucesso."));
-			transaction.commit();
-		} catch (BusinessException e) {
-			transaction.rollback();
-			FacesMessage message = new FacesMessage(e.getMessage());
-			message.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, message);
-		} finally {
-			data.close();
 		}
 	}
 	
@@ -78,6 +53,7 @@ public class ProviderController implements Serializable {
 			this.provider = new Provider();
 			faces.addMessage(null, new FacesMessage("Atualizado com sucesso."));
 			transaction.commit();
+			this.search();
 		} catch (BusinessException e) {
 			transaction.rollback();
 			FacesMessage message = new FacesMessage(e.getMessage());
@@ -100,6 +76,7 @@ public class ProviderController implements Serializable {
 			providerBusiness.remove(this.providerSelected);
 			context.addMessage(null, new FacesMessage("Fornecedor excluído."));
 			transaction.commit();
+			this.search();
 		} catch (BusinessException e) {
 			transaction.rollback();
 			FacesMessage message = new FacesMessage(e.getMessage());
@@ -118,20 +95,20 @@ public class ProviderController implements Serializable {
 		this.provider = provider;
 	}
 
+	public Provider getProviderSelected() {
+		return providerSelected;
+	}
+
+	public void setProviderSelected(Provider providerSelected) {
+		this.providerSelected = providerSelected;
+	}
+
 	public List<Provider> getProviders() {
 		return providers;
 	}
 
 	public void setProviders(List<Provider> providers) {
 		this.providers = providers;
-	}
-
-	public EntityManager getData() {
-		return data;
-	}
-
-	public void setData(EntityManager data) {
-		this.data = data;
 	}
 
 	public ProviderRepository getProviderRepository() {
@@ -141,5 +118,7 @@ public class ProviderController implements Serializable {
 	public void setProviderRepository(ProviderRepository providerRepository) {
 		this.providerRepository = providerRepository;
 	}
+	
+	
 
 }

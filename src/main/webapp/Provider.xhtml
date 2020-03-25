@@ -6,8 +6,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<f:metadata>
-		<f:viewParam name="id" value="#{providerController.provider}" />
-		<f:viewAction action="#{providerController.init}" />
+		<f:viewParam name="id" value="#{createProviderController.provider}" />
+		<f:viewAction action="#{createProviderController.init}" />
 	</f:metadata>
 
 	<h:head>
@@ -19,25 +19,25 @@
 			<h2>Cadastro de fornecedores</h2>
 			<p>
 				<p:inputText placeholder="Fornecedor" id="providername"
-					value="#{providerController.provider.providername}" required="true"
+					value="#{createProviderController.provider.providername}" required="true"
 					requiredMessage="Fornecedor obrigatório." />
 
 				<p:inputText placeholder="Endereço" id="address"
-					value="#{providerController.provider.address}" required="true"
+					value="#{createProviderController.provider.address}" required="true"
 					requiredMessage="Endereço obrigatório" />
 			</p>
 
 			<p>
 				<p:inputMask placeholder="Telefone" id="phone"
-					value="#{providerController.provider.phone}" mask="(99) 99999-9999" />
+					value="#{createProviderController.provider.phone}" mask="(99) 99999-9999" />
 
 				<p:inputText placeholder="Email" id="email"
-					value="#{providerController.provider.email}">
+					value="#{createProviderController.provider.email}">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
 				</p:inputText>
 			</p>
 
-			<p:commandButton value="Salvar" action="#{providerController.save}"
+			<p:commandButton value="Salvar" action="#{createProviderController.save}"
 				update="@form" />
 
 			<p:commandButton value="Voltar" update="@all"

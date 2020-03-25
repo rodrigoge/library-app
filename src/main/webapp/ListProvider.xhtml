@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:viewAction action="#{editProviderController.search}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Listagem de fornecedores | Livraria App</title>
+	</h:head>
+
+	<h:body>
+
+		<h:form>
+
+			<h2>Lista de fornecedores</h2>
+
+			<p:dataTable value="#{editProviderController.providers}" var="provider"
+				rendered="true" border="2" paginator="true"
+				paginatorAlwaysVisible="true" rows="5" paginatorPosition="bottom" emptyMessage="Não há fornecedores cadastrados">
+
+				<p:column headerText="#" width="2%">
+					<h:outputText value="#{provider.id}" />
+				</p:column>
+
+				<p:column headerText="Fornecedor" width="60">
+					<h:outputText value="#{provider.providername}" />
+				</p:column>
+
+				<p:column headerText="Telefone" width="60">
+					<h:outputText value="#{provider.phone}" />
+				</p:column>
+
+				<p:column headerText="Email" width="60">
+					<h:outputText value="#{provider.email}" />
+				</p:column>
+
+				<p:column headerText="Ações" width="35">
+					<p:button title="Alterar" value="Alterar">
+						
+					</p:button>
+
+					<p:commandButton title="Excluir" value="Excluir"
+						action="#{editProviderController.delete}" update="@form">
+						<f:setPropertyActionListener value="#{provider}"
+							target="#{editProviderController.providerSelected}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:commandButton value="Voltar" update="@all"
+				onclick="window.history.go(-1);" />
+
+			<p:autoUpdate disabled="false" />
+		</h:form>
+
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+
+	</h:body>
+</ui:composition>
