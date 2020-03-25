@@ -2,7 +2,6 @@ package br.com.library.controllers;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -25,7 +24,6 @@ public class CreateProviderController implements Serializable {
 
 	private Provider provider = new Provider();
 	private Provider providerSelected = new Provider();
-	private List<Provider> providers;
 	EntityManager data = DataConfiguration.getEntityManager();
 	private ProviderRepository providerRepository = new ProviderRepository(data);
 	
@@ -63,14 +61,6 @@ public class CreateProviderController implements Serializable {
 
 	public void setProvider(Provider provider) {
 		this.provider = provider;
-	}
-
-	public List<Provider> getProviders() {
-		return providers;
-	}
-
-	public void setProviders(List<Provider> providers) {
-		this.providers = providers;
 	}
 
 	public EntityManager getData() {

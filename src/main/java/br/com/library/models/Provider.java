@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +20,7 @@ public class Provider implements Serializable {
 	private Long id;
 	
 	@Column(length = 100, nullable = false)
+	@JoinColumn(name = "provider")
 	private String providername;
 	
 	@Column(length = 100, nullable = false)

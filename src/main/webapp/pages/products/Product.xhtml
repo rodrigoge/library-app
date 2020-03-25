@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{createProductController.product}" />
+		<f:viewAction action="#{createProductController.searchProviders}" />
+		<f:viewAction action="#{createProductController.init}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Cadastrar produtos | Library App</title>
+	</h:head>
+
+	<h:body>
+		<h:form>
+			<h2>Cadastro de produtos</h2>
+			<p>
+				<p:inputText placeholder="Produto" id="productname"
+					value="#{createProductController.product.productname}"
+					required="true" requiredMessage="Nome do produto obrigatório." />
+
+				<p:inputMask placeholder="Quantidade" id="quantity"
+					value="#{createProductController.product.quantity}"
+					required="true" requiredMessage="Quantidade obrigatória.">
+					<p:keyFilter regEx="/[0-9]/i" />
+				</p:inputMask>
+			</p>
+
+			<p>
+				<p:inputNumber placeholder="Preço Unitário" id="unitprice"
+					value="#{createProductController.product.unitprice}"
+					required="true" requiredMessage="Preço unitário obrigatório." />
+
+				<p:inputNumber placeholder="Margem de Lucro" id="profitmargin"
+					value="#{createProductController.product.profitmargin}"
+					required="true" requiredMessage="Margem de lucro obrigatória." />
+
+				<p:inputNumber placeholder="Preço de Venda" id="saleprice"
+					value="#{createProductController.product.saleprice}"
+					required="true" requiredMessage="Preço de venda obrigatório." />
+			</p>
+
+			<p>
+				<h:outputText value="Tipo de produto:" />
+				<p:selectOneMenu id="typeproduct"
+					value="#{createProductController.product.typeproduct}" required="true"
+					requiredMessage="Tipo de produto obrigatório.">
+					<f:selectItems value="#{createProductController.typeProduct}"
+						var="typerproduct" itemValue="#{typeproduct}"
+						itemLabel="#{typeproduct.type}" />
+
+				</p:selectOneMenu>
+
+			</p>
+			
+			<p>
+				<h:outputText value="Fornecedor:" />
+				<p:selectOneMenu id="providername"
+					value="#{createProductController.provider.providername}" required="true"
+					requiredMessage="Fornecedor obrigatório.">
+					<f:selectItems value="#{createProductController.providers}"
+						var="providername" itemValue="#{providername}"
+						itemLabel="#{providername.providername}" />
+				</p:selectOneMenu>
+
+			</p>
+
+			<p:commandButton value="Salvar"
+				action="#{createProductController.save}" update="@form" />
+
+			<p:commandButton value="Voltar" update="@all"
+				onclick="window.history.go(-1);" />
+
+		</h:form>
+
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+	</h:body>
+</ui:composition>
+
