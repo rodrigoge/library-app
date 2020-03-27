@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{editProductController.product}" />
+		<f:viewAction action="#{editProductController.init}" />
+	</f:metadata>
+
+	<h:head>
+		<title>Atualização de produtos</title>
+	</h:head>
+
+	<h:body>
+		<h:form>
+			<h2>Atualização de produtos</h2>
+			<p>
+				<p:inputText placeholder="Produto" id="productname"
+					value="#{editProductController.product.productname}"
+					required="true" requiredMessage="Nome do produto obrigatório." />
+
+				<p:inputMask placeholder="Quantidade" id="quantity"
+					value="#{editProductController.product.quantity}" required="true"
+					requiredMessage="Quantidade obrigatória.">
+					<p:keyFilter regEx="/[0-9]/i" />
+				</p:inputMask>
+			</p>
+
+			<p>
+				<p:inputNumber placeholder="Preço Unitário" id="unitprice"
+					value="#{editProductController.product.unitprice}" required="true"
+					requiredMessage="Preço unitário obrigatório." />
+
+				<p:inputNumber placeholder="Margem de Lucro" id="profitmargin"
+					value="#{editProductController.product.profitmargin}"
+					required="true" requiredMessage="Margem de lucro obrigatória." />
+
+				<p:inputNumber placeholder="Preço de Venda" id="saleprice"
+					value="#{editProductController.product.saleprice}" required="true"
+					requiredMessage="Preço de venda obrigatório." />
+			</p>
+
+			<p>
+				<h:outputText value="Tipo de produto:" />
+				<p:selectOneMenu id="typeproduct"
+					value="#{editProductController.product.typeproduct}"
+					required="true" requiredMessage="Tipo de produto obrigatório.">
+					<f:selectItem itemLabel="Selecione um tipo" itemValue="" />
+					<f:selectItems value="#{editProductController.typeProduct}"
+						var="typerproduct" itemValue="#{typeproduct}"
+						itemLabel="#{typeproduct.type}" />
+				</p:selectOneMenu>
+			</p>
+			
+			<p>
+				<h:outputText value="Fornecedor:" />
+				<p:selectOneMenu value="#{editProductController.providerSelect}">
+					<f:selectItem itemLabel="Selecione um fornecedor" itemValue=""/>
+					<f:selectItems value="#{editProductController.providersSelect}"/>
+				</p:selectOneMenu>
+			</p>
+
+			<p:commandButton value="Atualizar"
+				action="#{editProductController.update}" update="@all" />
+
+			<p:commandButton value="Voltar" update="@all"
+				onclick="window.location.href='ListProduct.xhtml'" />
+
+		</h:form>
+
+		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
+
+	</h:body>
+</ui:composition>
+

@@ -1,19 +1,24 @@
 package br.com.library.controllers;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import br.com.library.business.ProductBusiness;
 import br.com.library.business.exception.BusinessException;
 import br.com.library.models.Product;
+import br.com.library.models.Provider;
+import br.com.library.models.TypeProduct;
 import br.com.library.repositories.ProductRepository;
+import br.com.library.repositories.ProviderRepository;
 import br.com.library.utils.DataConfiguration;
 
 @ManagedBean
@@ -27,6 +32,10 @@ public class EditProductController implements Serializable {
 	private List<Product> products;
 	EntityManager data = DataConfiguration.getEntityManager();
 	private ProductRepository productRepository = new ProductRepository(data);
+	
+	private Provider providerSelect = new Provider();
+	private List<SelectItem> providersSelect;
+	private ProviderRepository providerRepository = new ProviderRepository(data);
 	
 	public void init() {
 		if(this.product == null) {
@@ -72,7 +81,7 @@ public class EditProductController implements Serializable {
 		ProductBusiness productBusiness = new ProductBusiness(new ProductRepository(data));
 		
 		try {
-			transaction.commit();
+			transaction.begin();
 			productBusiness.remove(this.productSelected);
 			context.addMessage(null, new FacesMessage("Produto removido."));
 			transaction.commit();
@@ -109,5 +118,43 @@ public class EditProductController implements Serializable {
 	public void setProductRepository(ProductRepository productRepository) {
 		this.productRepository = productRepository;
 	}
+	
+	public TypeProduct[] gettypeProduct() {
+		return TypeProduct.values();
+	}
+	
+	public List<SelectItem> getProvidersSelect() {
+		if(providersSelect == null) {
+			System.out.println("Aqui primeiro");
+			providersSelect = new ArrayList<SelectItem>();
+			
+			providerRepository = new ProviderRepository(data);
+			
+			List<Provider> listProviders = providerRepository.all();
+			
+			if(listProviders != null && !listProviders.isEmpty()) {
+				SelectItem item;
+				
+				for (Provider provider : listProviders) {
+					item = new SelectItem(provider, provider.getProvidername());
+					
+					providersSelect.add(item);
+					System.out.println("Aqui");
+				}
+			}
+		}
+		
+		return providersSelect;
+	}
+
+	public Provider getProviderSelect() {
+		return providerSelect;
+	}
+
+	public void setProviderSelect(Provider providerSelect) {
+		this.providerSelect = providerSelect;
+	}
+	
+	
 
 }
