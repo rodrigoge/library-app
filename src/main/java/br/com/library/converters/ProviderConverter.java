@@ -21,7 +21,13 @@ public class ProviderConverter implements Converter{
 		
 		try {
 			if(value != null && !"".equals(value)) {
-				provider = new ProviderRepository(data).index(new Long(value));
+				Long id = Long.valueOf(value);
+				ProviderRepository providerRepository = new ProviderRepository(data);
+				
+				provider = providerRepository.index(new Long(value));
+				
+				return providerRepository.index(id);
+				
 			}
 			
 			return provider;

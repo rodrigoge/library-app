@@ -27,7 +27,7 @@ public class Product implements Serializable {
 	
 	@Column(nullable = false)
 	@JoinColumn(name="providername")
-	private Provider provider;
+	private String provider;
 	
 	@Column(length = 10, nullable = false)
 	private Double quantity;
@@ -65,12 +65,12 @@ public class Product implements Serializable {
 		this.typeproduct = typeproduct;
 	}
 
-	public Provider getProvider() {
+	public String getProvider() {
 		return provider;
 	}
 
-	public void setProvider(Provider provider) {
-		this.provider = provider;
+	public void setProvider(String string) {
+		this.provider = string;
 	}
 
 	public Double getQuantity() {

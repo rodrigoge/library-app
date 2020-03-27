@@ -7,7 +7,6 @@
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{createProductController.product}" />
-		<f:viewAction action="#{createProductController.searchProviders}" />
 		<f:viewAction action="#{createProductController.init}" />
 	</f:metadata>
 
@@ -24,8 +23,8 @@
 					required="true" requiredMessage="Nome do produto obrigatório." />
 
 				<p:inputMask placeholder="Quantidade" id="quantity"
-					value="#{createProductController.product.quantity}"
-					required="true" requiredMessage="Quantidade obrigatória.">
+					value="#{createProductController.product.quantity}" required="true"
+					requiredMessage="Quantidade obrigatória.">
 					<p:keyFilter regEx="/[0-9]/i" />
 				</p:inputMask>
 			</p>
@@ -47,8 +46,9 @@
 			<p>
 				<h:outputText value="Tipo de produto:" />
 				<p:selectOneMenu id="typeproduct"
-					value="#{createProductController.product.typeproduct}" required="true"
-					requiredMessage="Tipo de produto obrigatório.">
+					value="#{createProductController.product.typeproduct}"
+					required="true" requiredMessage="Tipo de produto obrigatório.">
+					<f:selectItem itemLabel="Selecione um tipo" itemValue=""/>
 					<f:selectItems value="#{createProductController.typeProduct}"
 						var="typerproduct" itemValue="#{typeproduct}"
 						itemLabel="#{typeproduct.type}" />
@@ -56,17 +56,13 @@
 				</p:selectOneMenu>
 
 			</p>
-			
+
 			<p>
 				<h:outputText value="Fornecedor:" />
-				<p:selectOneMenu id="providername"
-					value="#{createProductController.provider.providername}" required="true"
-					requiredMessage="Fornecedor obrigatório.">
-					<f:selectItems value="#{createProductController.providers}"
-						var="providername" itemValue="#{providername}"
-						itemLabel="#{providername.providername}" />
+				<p:selectOneMenu value="#{createProductController.providerSelect}">
+					<f:selectItem itemLabel="Selecione um fornecedor" itemValue=""/>
+					<f:selectItems value="#{createProductController.providersSelect}"/>
 				</p:selectOneMenu>
-
 			</p>
 
 			<p:commandButton value="Salvar"

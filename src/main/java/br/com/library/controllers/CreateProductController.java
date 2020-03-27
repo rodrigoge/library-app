@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -28,11 +29,15 @@ public class CreateProductController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Product product = new Product();
-	private Provider provider = new Provider();
-	private List<Provider> providers = new ArrayList<Provider>();
 	private List<Product> products;
 	EntityManager data = DataConfiguration.getEntityManager();
 	private ProductRepository productRepository = new ProductRepository(data);
+	
+	private Provider providerSelect = new Provider();
+	private List<SelectItem> providersSelect;
+	private ProviderRepository providerRepository = new ProviderRepository(data);
+
+	
 	
 	public void init() {
 		if(this.product == null) {
@@ -48,6 +53,7 @@ public class CreateProductController implements Serializable {
 		try {
 			transaction.begin();
 			ProductBusiness productBusiness = new ProductBusiness(new ProductRepository(data));
+			product.setProvider(providerSelect.getProvidername());
 			productBusiness.save(product);
 			this.product = new Product();
 			context.addMessage(null, new FacesMessage("Produto salvo com sucesso."));
@@ -80,34 +86,42 @@ public class CreateProductController implements Serializable {
 	public void setProductRepository(ProductRepository productRepository) {
 		this.productRepository = productRepository;
 	}
-	
+
+	public Provider getProviderSelect() {
+		return providerSelect;
+	}
+
+	public void setProviderSelect(Provider providerSelect) {
+		this.providerSelect = providerSelect;
+	}
+
 	public TypeProduct[] gettypeProduct() {
 		return TypeProduct.values();
 	}
-	
-	public List<Provider> getProviders() {
-		return providers;
-	}
 
-	public void setProviders(List<Provider> providers) {
-		this.providers = providers;
+	public List<SelectItem> getProvidersSelect() {
+		if(providersSelect == null) {
+			System.out.println("Aqui primeiro");
+			providersSelect = new ArrayList<SelectItem>();
+			
+			providerRepository = new ProviderRepository(data);
+			
+			List<Provider> listProviders = providerRepository.all();
+			
+			if(listProviders != null && !listProviders.isEmpty()) {
+				SelectItem item;
+				
+				for (Provider provider : listProviders) {
+					item = new SelectItem(provider, provider.getProvidername());
+					
+					providersSelect.add(item);
+					System.out.println("Aqui");
+				}
+			}
+		}
+		
+		return providersSelect;
+		
 	}
-	
-	public Provider getProvider() {
-		return provider;
-	}
-
-	public void setProvider(Provider provider) {
-		this.provider = provider;
-	}
-
-	public void searchProviders() {
-		EntityManager data = DataConfiguration.getEntityManager();
-		ProviderRepository providers = new ProviderRepository(data);
-		this.providers = providers.all();
-		data.close();
-	}
-	
-	
 	
 }

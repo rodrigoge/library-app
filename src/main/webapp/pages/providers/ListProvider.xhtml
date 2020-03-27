@@ -28,10 +28,7 @@
 				</p:column>
 
 				<p:column headerText="Fornecedor" width="60">
-					<p:cellEditor>
-						<f:facet name="input"><p:inputText id="modelInput" value="#{provider.providername}"/></f:facet>
-						<f:facet name="output"><h:outputText value="#{provider.providername}" /></f:facet> 
-					</p:cellEditor>
+					<h:outputText value="#{provider.providername}" />
 				</p:column>
 
 				<p:column headerText="Telefone" width="60">

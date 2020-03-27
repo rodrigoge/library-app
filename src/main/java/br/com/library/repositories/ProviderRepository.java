@@ -46,4 +46,6 @@ public class ProviderRepository implements Serializable {
 		return query.getResultList();
 	}
 	
+	
+	
 }
