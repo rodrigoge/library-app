@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+@import
+	url('https://fonts.googleapis.com/css?family=Pavanam&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: #a366ff;
+}
+
+#frmLogin, #frmUser, #frmRecovery, #frmUpdatePassword, #frmUpdate {
+	margin: 50px auto;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 10px 10px #944dff;
+}
+
+#frmLogin{
+	width: 400px;
+	height: 410px;
+}
+
+#frmUser, #frmUpdate
+{
+	width: 450px;
+	height: 620px;
+}
+
+#frmRecovery, #frmUpdatePassword {
+	width: 480px;
+	height: 340px;
+}
+
+#text{
+	font-family: 'Pavanam', sans-serif;
+}
+
+h2 {
+	font-size: 36px;
+	font-family: 'Pavanam', sans-serif;
+}
+
+.ui-inputfield {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	width: 300px !important;
+	padding: 8px !important;
+	box-shadow: none !important;
+	border: 1px solid #944dff;
+}
+
+.ui-selectonemenu {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	width: 300px !important;
+	height: 45px; padding : 8px !important;
+	box-shadow: none !important;
+	background: #fff;
+	border: 1px solid #944dff;
+	padding: 8px !important;
+}
+
+.ui-select{
+	background: red !important;
+}
+
+.ui-selectonemenu-label {
+	box-shadow: none;
+}
+
+.ui-selectonemenu-item.ui-selectonemenu-list-item {
+	background: #FFFFFF !important;
+	font-size: 16px;
+}
+
+.ui-selectonemenu-item.ui-selectonemenu-list-item:hover {
+	background: #944dff !important;
+	color: #fff;
+}
+
+.ui-button{
+	background: #944dff !important;
+	color: #fff;
+	font-weight: bold;
+	outline: none;
+	width: 300px;
+	height: 50px;
+	font-size: 16px;
+	box-shadow: none;
+	text-shadow: none;
+	transition: 0.2s all;
+	border-radius: 5px;
+}
+
+.ui-button:hover{
+	background: #a366ff !important;
+}
+
+.ui-link{
+	font-size: 14px;
+	text-decoration: none;
+	transition: 0.2s all;
+}
+
+.ui-link:hover{
+	color: #a366ff !important;
+}
+
+
+
+
+
+

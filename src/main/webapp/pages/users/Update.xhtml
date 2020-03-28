@@ -12,16 +12,18 @@
 
 	<h:head>
 		<title>Atualização de usuário</title>
+		<h:outputStylesheet library="css" name="global.css"/>
 	</h:head>
 
 	<h:body>
-		<h:form>
+		<h:form id="frmUpdate">
 			<h2>Atualização de usuários</h2>
 			<p>
 				<p:inputText placeholder="Nome completo" id="fullname"
 					value="#{editUserController.user.fullname}" required="true"
 					requiredMessage="Nome obrigatório." />
-
+			</p>
+			<p>
 				<p:inputText placeholder="Endereço" id="address"
 					value="#{editUserController.user.address}" required="true"
 					requiredMessage="Endereço obrigatório" />
@@ -30,7 +32,8 @@
 			<p>
 				<p:inputMask placeholder="Telefone" id="phone"
 					value="#{editUserController.user.phone}" mask="(99) 99999-9999" />
-
+			</p>
+			<p>
 				<p:inputText placeholder="Email" id="email"
 					value="#{editUserController.user.email}">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
@@ -43,6 +46,8 @@
 					requiredMessage="Nome de usuário obrigatório.">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-]/i" />
 				</p:inputText>
+			</p>
+			<p>
 
 				<p:password placeholder="Senha" id="password"
 					value="#{editUserController.user.password}" feedback="true"
@@ -54,21 +59,24 @@
 			</p>
 
 			<p>
-				<h:outputText value="Tipo de usuário:" />
-				<p:selectOneButton id="typeuser"
+				<p:selectOneMenu id="typeuser"
 					value="#{editUserController.user.typeuser}" required="true"
 					requiredMessage="Tipo de usuário obrigatório.">
 					<f:selectItems value="#{editUserController.typeUser}" var="typeruser"
 						itemValue="#{typeuser}" itemLabel="#{typeuser.type}" />
 
-				</p:selectOneButton>
+				</p:selectOneMenu>
 			</p>
 
-			<p:commandButton value="Atualizar" action="#{editUserController.update}"
-				update="@all" />
+			<p>
+				<p:commandButton value="Atualizar" action="#{editUserController.update}"
+					update="@all" />
+			</p>
 			
-			<p:commandButton value="Voltar" update="@all" onclick="window.location.href='ListUser.xhtml'"/>
-
+			<p>
+				<p:commandButton value="Voltar" update="@all" onclick="window.location.href='ListUser.xhtml'"/>
+			</p>
+			
 		</h:form>
 		
 		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />

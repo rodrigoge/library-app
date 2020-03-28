@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+@import
+	url('https://fonts.googleapis.com/css?family=Pavanam&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: #a366ff;
+}
+
+#frmList{
+	font-size: 22px !important;
+	width: 1250px;
+}
+
+.ui-output{
+	font-size: 22px;
+}
+
+
+
+
+
+

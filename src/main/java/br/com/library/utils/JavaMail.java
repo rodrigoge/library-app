@@ -51,7 +51,7 @@ public class JavaMail {
 			message.setRecipients(Message.RecipientType.TO, toUser);
 			message.setSubject("Recuperação de senha | Library App");
 			text = "<p>Olá, se você recebeu este email é porque foi solicitada uma alteração de sua senha no cadastro do <b>Library App</b>.</p> "
-					+ "<p>Para alterar sua senha clique <a href='http://localhost:8080/library-app/Update.xhtml'>aqui.</a></p>"
+					+ "<p>Para alterar sua senha clique <a href='http://localhost:8080/library-app/pages/users/UpdatePassword.xhtml'>aqui.</a></p>"
 					+ "<p>Caso não tenha solicitado nenhuma alteração, desconsidere este email.</p>";
 			message.setContent(text, "text/html");
 

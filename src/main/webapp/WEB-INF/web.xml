@@ -10,6 +10,11 @@
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 	</servlet>
 
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bluesky</param-value>
+	</context-param>
+
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>

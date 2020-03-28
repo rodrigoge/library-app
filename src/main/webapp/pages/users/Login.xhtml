@@ -12,10 +12,11 @@
 
 	<h:head>
 		<title>Login | Livraria App</title>
+		<h:outputStylesheet library="css" name="global.css"/>
 	</h:head>
 
 	<h:body>
-		<h:form>
+		<h:form id="frmLogin">
 			<h2>Login</h2>
 
 			<p>
@@ -36,7 +37,7 @@
 					requiredMessage="Tipo de usuário é necessário">
 					<f:selectItem itemLabel="Selecione o tipo" itemValue="" />
 					<f:selectItems value="#{loginController.typeUser}" var="typeUser"
-						itemValue="#{typeUser}" itemLabel="#{typeUser.type}" />
+						itemValue="#{typeUser}" itemLabel="#{typeUser.type}"/>
 				</p:selectOneMenu>
 			</p>
 			<p>

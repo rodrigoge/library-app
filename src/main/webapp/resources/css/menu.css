@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+*{
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+@import
+	url('https://fonts.googleapis.com/css?family=Pavanam&display=swap');
+
+@import
+	url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+body {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	background-color: #a366ff;
+}
+
+#frmMenu {
+	margin: 50px auto;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 10px 10px #944dff;
+	width: 1000px;
+	height: 340px;
+}
+
+#text{
+	font-family: 'Pavanam', sans-serif;
+}
+
+h2 {
+	font-size: 36px;
+	font-family: 'Pavanam', sans-serif;
+}
+
+.ui-inputfield {
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px;
+	width: 300px !important;
+	padding: 8px !important;
+	box-shadow: none !important;
+	border: 1px solid #944dff;
+}
+
+.ui-menuitem{
+	font-family: 'Roboto', sans-serif;
+	font-size: 16px !important;
+	box-shadow: none !important;
+	background: #fff;
+	border: 1px solid #944dff;
+	text-align: center;
+}
+
+.ui-menuitem-text:hover{
+	
+}
+
+.ui-button{
+	background: #944dff !important;
+	color: #fff !important;
+	font-weight: bold;
+	outline: none;
+	width: 120px;
+	height: 40px;
+	font-size: 16px !important;
+	box-shadow: none;
+	text-shadow: none;
+	transition: 0.2s all;
+	border-radius: 5px;
+}
+
+.ui-button:hover{
+	background: #a366ff !important;
+}
+
+
+
+

@@ -12,10 +12,12 @@
 
 	<h:head>
 		<title>Recuperação de senha | Livraria App</title>
+		<h:outputStylesheet library="css" name="global.css" />
+
 	</h:head>
 
 	<h:body>
-		<h:form>
+		<h:form id="frmRecovery">
 			<h2>Recuperação de senha</h2>
 
 			<p>
@@ -28,12 +30,15 @@
 			<p:commandButton value="Entrar"
 				action="#{editUserController.recoveryPassword}" update="@all" />
 
-			<p>Aguarde alguns segundos até confirmação de envio do email.</p>
-			
-		</h:form>
-		
-		<p:commandButton value="Voltar" update="@all" onclick="window.history.go(-1);"/>
+			<p id="text">Aguarde alguns segundos até confirmação de envio do email.</p>
 
+
+
+			<p>
+				<p:commandButton value="Voltar" update="@all"
+					onclick="window.history.go(-1);" />
+			</p>
+		</h:form>
 		<p:growl showDetail="false" showSummary="true" />
 	</h:body>
 </ui:composition>
