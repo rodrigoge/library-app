@@ -29,10 +29,16 @@ body {
 	width: 1250px;
 }
 
+
 .ui-output{
 	font-size: 22px;
 }
 
+h2{
+	color: #fff;
+	font-size: 36px;
+	font-family: 'Pavanam', sans-serif;
+}
 
 
 

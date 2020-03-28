@@ -12,15 +12,19 @@
 
 	<h:head>
 		<title>Cadastrar produtos | Library App</title>
+		<h:outputStylesheet library="css" name="global.css"/>
 	</h:head>
 
 	<h:body>
-		<h:form>
+		<h:form id="frmProduct">
 			<h2>Cadastro de produtos</h2>
 			<p>
 				<p:inputText placeholder="Produto" id="productname"
 					value="#{createProductController.product.productname}"
 					required="true" requiredMessage="Nome do produto obrigatório." />
+			</p>
+			
+			<p>
 
 				<p:inputMask placeholder="Quantidade" id="quantity"
 					value="#{createProductController.product.quantity}" required="true"
@@ -33,10 +37,16 @@
 				<p:inputNumber placeholder="Preço Unitário" id="unitprice"
 					value="#{createProductController.product.unitprice}"
 					required="true" requiredMessage="Preço unitário obrigatório." />
+			</p>
+			
+			<p>
 
 				<p:inputNumber placeholder="Margem de Lucro" id="profitmargin"
 					value="#{createProductController.product.profitmargin}"
 					required="true" requiredMessage="Margem de lucro obrigatória." />
+			</p>
+			
+			<p>
 
 				<p:inputNumber placeholder="Preço de Venda" id="saleprice"
 					value="#{createProductController.product.saleprice}"
@@ -44,7 +54,6 @@
 			</p>
 
 			<p>
-				<h:outputText value="Tipo de produto:" />
 				<p:selectOneMenu id="typeproduct"
 					value="#{createProductController.product.typeproduct}"
 					required="true" requiredMessage="Tipo de produto obrigatório.">
@@ -58,19 +67,22 @@
 			</p>
 
 			<p>
-				<h:outputText value="Fornecedor:" />
 				<p:selectOneMenu value="#{createProductController.providerSelect}">
 					<f:selectItem itemLabel="Selecione um fornecedor" itemValue=""/>
 					<f:selectItems value="#{createProductController.providersSelect}"/>
 				</p:selectOneMenu>
 			</p>
-
-			<p:commandButton value="Salvar"
-				action="#{createProductController.save}" update="@form" />
-
-			<p:commandButton value="Voltar" update="@all"
-				onclick="window.history.go(-1);" />
-
+			
+			<p>
+				<p:commandButton value="Salvar"
+					action="#{createProductController.save}" update="@form" />
+			</p>
+			
+			<p>
+				<p:commandButton value="Voltar" update="@all"
+					onclick="window.history.go(-1);" />
+			</p>
+			
 		</h:form>
 
 		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />

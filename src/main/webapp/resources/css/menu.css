@@ -51,17 +51,18 @@ h2 {
 	border: 1px solid #944dff;
 }
 
-.ui-menuitem{
+.ui-menuitem, .ui-submenu{
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px !important;
 	box-shadow: none !important;
 	background: #fff;
 	border: 1px solid #944dff;
 	text-align: center;
+	text-shadow: none;
 }
 
-.ui-menuitem-text:hover{
-	
+.ui-menuitem:hover{
+	background-color: none !important;
 }
 
 .ui-button{

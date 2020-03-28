@@ -12,16 +12,19 @@
 
 	<h:head>
 		<title>Cadastrar fornecedor | Library App</title>
+		<h:outputStylesheet library="css" name="global.css"/>
 	</h:head>
 
 	<h:body>
-		<h:form>
+		<h:form id="frmProvider">
 			<h2>Cadastro de fornecedores</h2>
 			<p>
 				<p:inputText placeholder="Fornecedor" id="providername"
 					value="#{createProviderController.provider.providername}" required="true"
 					requiredMessage="Fornecedor obrigatório." />
-
+			</p>
+			
+			<p>
 				<p:inputText placeholder="Endereço" id="address"
 					value="#{createProviderController.provider.address}" required="true"
 					requiredMessage="Endereço obrigatório" />
@@ -30,19 +33,25 @@
 			<p>
 				<p:inputMask placeholder="Telefone" id="phone"
 					value="#{createProviderController.provider.phone}" mask="(99) 99999-9999" />
-
+			</p>
+			
+			<p>
 				<p:inputText placeholder="Email" id="email"
 					value="#{createProviderController.provider.email}">
 					<p:keyFilter regEx="/[a-zA-Z0-9_.-@]/i" />
 				</p:inputText>
 			</p>
-
-			<p:commandButton value="Salvar" action="#{createProviderController.save}"
-				update="@form" />
-
-			<p:commandButton value="Voltar" update="@all"
-				onclick="window.history.go(-1);" />
-
+			
+			<p>
+				<p:commandButton value="Salvar" action="#{createProviderController.save}"
+					update="@form" />
+			</p>
+			
+			<p>
+				<p:commandButton value="Voltar" update="@all"
+					onclick="window.history.go(-1);" />
+			</p>
+			
 		</h:form>
 
 		<p:growl showDetail="false" autoUpdate="true" showSummary="true" />
